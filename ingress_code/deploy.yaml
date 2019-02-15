@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: www
+spec:
+  selector:
+    matchLabels:
+      run: www
+  template:
+    metadata:
+      labels:
+        run: www
+    spec:
+      containers:
+      - name: www
+        image: nginx:1.12.2
