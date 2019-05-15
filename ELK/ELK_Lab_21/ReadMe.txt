@@ -1,0 +1,1 @@
+filebeat.exe setup --dashboards

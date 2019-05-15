@@ -1,0 +1,15 @@
+filebeat.modules:
+  - module: nginx
+    access:
+      enabled: true
+      var.paths: ["chemin - vers - ngnix - log \\access.log*"]
+    error:
+      enabled: true
+      var.paths: ["Dchemin - vers - ngnix - log \\error.log*"]    
+tags: ["service-X", "web-tier"]
+setup.kibana:
+  host: "localhost:5601"
+#-------------------------- Elasticsearch output ------------------------------
+output.elasticsearch:
+  # Array of hosts to connect to.
+  hosts: ["localhost:9200"]
