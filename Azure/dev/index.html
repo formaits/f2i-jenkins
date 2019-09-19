@@ -1,0 +1,286 @@
+<html><body>
+<a href="https://github.com/formaits/f2i-jenkins/tree/master/AWS">github de référence</a></p>
+
+sommaire:
+<ol>
+  <li>Pré-requis AWS</li>
+  <ol>
+    <li>Créer un user</li>
+  </ol>
+</ol>
+
+---
+
+<ol>
+  <li>Pré-requis AWS</li>
+  <ol>
+  Afin de sécuriser les connexions, AWS donne des pré-requis listé dans la page "Tableau de bord" du service IAM (accessible en recherchant "IAM" dans la liste des services).
+    <li>Créer un user</li>
+    <ol>
+      <li>Aller dans la partie "Utilisateurs"</li>
+      <li>Cliquer sur "Ajouter un utilisateur"</li>
+      <li>Indiquer son nom "Nom d'utilisateur"</li>
+      <li>Définir le type d'accès "Type d'accès"</li>
+      <li>Cliquer sur "Suivant : Autorisations"</li>
+      <li>Définir les autorisations</li>
+      <li>Cliquer sur "Suivant : Balises"</li>
+      <li>Cliquer sur "Créer un utilisateur"</li>    
+    </ol>
+  
+    <li>Création d'un groupe</li>
+    Permet de gérer les droits au niveau d'un groupe, et donc appliquer ses droits à un groupe d'utilisateur.
+  </ol>
+  
+  <li>Gestion du stockage (service S3)</li>
+  <ol>
+    <li>Créer un compartiment</li>
+    <li>Remplir "Nom du compartiment"</li>
+    <b>Ce nom doit être unique dans la région de stockage</b>
+    <li>Choisir une région de stockage</li>
+    <b>Attention</b>  dépendant de la législation, certaines données doivent rester en France (ex: donnée médicale).<br>
+    <i>Il est possible de cliquer directement sur "créer", ce qui créera le stockage sans gérer certaines parties comme les autorisations et certaines options (cela pourra être fait plus tard).</i>
+    
+    <ol>
+      <li>Gestion d'un site statique</li>
+      <ol>
+        <li>Cette option est accessible en cliquant sur le stockage et sur "Propriétés".</li>
+        <li>Puis "Hébergement de site Web statique"</li>
+        <li>Il faut alors indiquer le nom de la page index.html et la page d'erreur.html</li>
+        <li>Et enfin "Enregistrer"</li>
+      </ol>
+        
+      <li>Gestion du versioning</li>
+      <ol>
+        <li>Cette option est accessible en cliquant sur le stockage et sur "Propriétés" ou à la création.</li>
+        <li>Puis "Versioning"</li>
+        <li>Et enfin sélectionner "Activer la gestion des versions"</li>
+        Cela gérera les différentes versions d'un fichier.<br>
+        (visible dans la page principale du stockage)
+      </ol>
+      
+      <li>Gestion de la replication sur différents stockage.</li>
+      <ol>
+        <li>Cette option est accessible en cliquant sur le stockage et sur "Propriétés" ou à la création.</li>
+        <li>Puis "Versioning"</li>
+        <li>Et enfin sélectionner "Activer la gestion des versions"</li>
+        Cela gérera les différentes versions d'un fichier.<br>
+        (visible dans la page principale du stockage)
+      </ol>
+    </ol>
+  </ol>
+
+  <li>Gestion des intances</li>
+  Accessible par le service "EC2"
+  <ol>
+    <li>Création d'une instance depuis un Quick Start</li>
+	<ol>
+	  <li>Choisir dans la liste un type de machine OS ...</li>
+	  <li>Faire "Sélectionner"</li>
+	</ol>
+  </ol>
+
+  <li>Gestion des notifications</li>
+  Accessible par le service "SNS"
+  <ol>
+    <li><b><i>A rédiger</i></b></li>
+	Cela permet de définir des régles de notifications sur des Events.
+	(cf TP Lab_3_5_Events)
+  </ol>
+  
+  <li>Gestion des containeurs</li>
+  Accessible par le service "ECS"
+  <ol>
+    <li>Création d'un containeur avec loadbalancing</li>
+	<ol>
+	  <li>Faire "Mise en route"</li>
+	  <li>Donner un nom à la tâche</li>
+	  <li>Donner un nom au(x) conteneur(s)</li>
+	  <li>Choisir une image DockerHub</li>
+	  <li>Définir le mappage de ports</li>
+	  <li>"Etape suivante"</li>
+	  <li>Définition du service</li>
+	  <ol>
+	    Un service permet de gérer un nombre constant de conteneur.
+	    <li>Définir le nom du service</li>
+	    <li>Indiquer le nombre de tâches associées aux services</li>
+	  </ol>
+	  <li>Définition des accès réseaux</li>
+	  <ol>
+	    <li>Sélection ou non d'un équilibreur de charge et définition de ce dernier.</li>
+	  </ol>
+	  <li>Service Rôle IAM</li>
+	  <ol>
+	    <li>Création automatique ou sélection d'un Rôle</li>
+	  </ol>
+	  <li>"Etape suivante"</li>
+	  <li>Conf du cluster</li>
+	  <ol>
+	    <li>Définition le nom</li>
+		<li>Définir le type d'instance</li>
+		<li>Définir le nombre d'instance</li>
+		<li>Définir la paire de clef pour connexion ssh</li>
+	  </ol>
+	  <li>Groupe de sécurité</li>
+	  <ol>
+	    <li>Définition des régles de sécurité</li>
+	    <li>Service Rôle IAM</li>
+	    <ol>
+	      <li>Création automatique ou sélection d'un Rôle</li>
+	    </ol>
+	  </ol>
+	  <li>"Vérifier & Lancer"</li>
+	  <li>"Lancer"</li>
+	  Cela va prendre du temps, mais créera un cluster de docker avec loardbalacing.
+	  Le dns du loadbancing est visible dans la descriptoin de ce dernier.
+	  sous EC2 > Équilibreur de charge
+	  
+	</ol>
+  </ol>
+  
+  <li>IDE intégré à AWS (cloud9)</li>
+  Accessible par le service "Cloud9"<br>
+  Ce service permet de créer un environnement IDE complet, pour faire ses devs.
+  <ol>
+    <li>Choisir une région (UE Paris n'est pas disponible)</li>
+	<li>"Create environment"</li>
+	<li>environnement</li>
+	<ol>
+	  <li>Définir un nom</li>
+	  <li>Donner une description si besoin</li>	  
+	</ol>
+	<li>environnement</li>
+	<ol>
+	  <li>Définir un nom</li>
+	  <li>Donner une description si besoin</li>	  
+	</ol>
+  </ol>
+  
+  <li>Référentiel d'image docker (dockerHub like)</li>
+  Accessible par le service "ECR"<br>
+  Ce service permet d'avoir un référentiel de version d'une image docker privé.
+  <ol>
+    <li>"Création"</li>
+    <ol>
+      <li>"Démarrer"</li>
+	  <li>Définir le nom du référentiel</li>
+	  <li>"Créer"</li>
+	</ol>
+	<li>Utilisation</li>
+	<ol>
+	  <li>Sélection du référentiel</li>
+	  <li>Suivre les étapes de "Afficher les commandes Push"</li>
+	  Une fois l'image poussée, elle est visible dans le référentiel.<br>
+	  Un référentiel regroupera plusieurs versions d'une image privé.</p>
+	</ol>
+  </ol>
+    
+  <li>Déploiement d'une application</li>
+  Accessible par le service "Elastic Beanstalk"<br>
+  Ce service permet de déployer automatique une application.
+  <ol>
+    <li>"Démarrer"</li>
+    <ol>
+	  <li>Définir le nom de l'application</li>
+	  <li>Définir la conf de base</li>
+	  <ol>
+	    <li>"Charger votre code"</li>
+		<ol>
+		  <li>Origine du fichier. Soit en local sur le pc, soit sur S3.</li>
+		  <li>"Charger"</li>
+		</ol>
+		<li>"Créer une application"</li>
+		Cela va prendre un peu de temps, mais une fois finie l'application sera déployée.
+	  </ol>
+	</ol>
+	<li>Utilisation</li>
+	L'URL de l'application est alors disponible.
+  </ol>
+
+  <li>Déploiement d'une base</li>
+  Accessible par le service "RDS"<br>
+  Ce service permet de déployer automatique une application.
+  <ol>
+    <li>"Créer une base de données"</li>
+    <ol>
+	  <li>Définir les paramètres de base (Standard ou easy)</li>
+	  <li>Définir le type de moteur</li>
+	  <li>Définir la version du moteur</li>
+	  <li>Choisir le modèle (offre gratuite)</li>
+	  <li>Définir le nom de la base</li>
+	  <li>Définir le user admin</li>
+	  <li>Définir le mdp du admin</li>
+	  <li>Définir la taille de l'instance</li>
+	</ol>
+	<li>Utilisation</li>
+	Une fois la base créé, elle peut être accessible grâce au soft opensource HeidiSQL.<br>
+	Pour cela il faut récupérer les informations de connexions
+	<ol>
+	  <li>Point de terminaison : Disponible dans la description de la base (Nom ou IP de l'hôte)</li>
+	  <li>User : Défini à la création</li>
+	  <li>Mdp : Défini à la création</li>
+	  <li>Port : Disponible dans la description de la base</li>
+	</ol>
+  </ol>
+  
+  <li>Déploiement d'un service de cache</li>
+  Accessible par le service "cloudfront"<br>
+  Ce service permet de déployer un service web avec du cache pour de la diffusion d'image ou vidéo.<br>
+  Et ainsi éviter les latences.
+  <ol>
+    <li>Créer un compartiment</li>
+	<li>Y insérer du contenu</li>
+    <ol>
+	  <li>Définir les paramètres de base (Standard ou easy)</li>
+	  <li>Définir le type de moteur</li>
+	  <li>Définir la version du moteur</li>
+	  <li>Choisir le modèle (offre gratuite)</li>
+	  <li>Définir le nom de la base</li>
+	  <li>Définir le user admin</li>
+	  <li>Définir le mdp du admin</li>
+	  <li>Définir la taille de l'instance</li>
+	</ol>
+	<li>Utilisation</li>
+	Une fois la base créé, elle peut être accessible grâce au soft opensource HeidiSQL.<br>
+	Pour cela il faut récupérer les informations de connexions
+	<ol>
+	  <li>Point de terminaison : Disponible dans la description de la base (Nom ou IP de l'hôte)</li>
+	  <li>User : Défini à la création</li>
+	  <li>Mdp : Défini à la création</li>
+	  <li>Port : Disponible dans la description de la base</li>
+	</ol>
+  </ol>
+  
+  <li>DevOps</li>
+  <ol>
+    <li>Gestion du code (repo)</li>
+	<a href="https://github.com/formaits/f2i-jenkins/tree/master/AWS/Lab_8_CodeCommit.doc">doc TP de référence</a></p>
+    Accessible par le service "CodeCommit"<br>
+	Ce service fourni un repo git privé dans AWS.
+	<ol>
+	  <li>"Créer un référentiel"</li>
+	  <li>Indiquer le nom du référentiel (repo)</li>
+	  <li>Utilisation</li>
+	  Le référentiel s'utilise alors comme un repo classique.<br>
+	  Avec une connexion par ssh ou https.<br>
+	  Cependant, il n'est pas accessible par le user principal de AWS, cela nécessite la création d'un user,<br>
+	  qui aura un crédential de généré.
+	</ol>
+	
+	<li>Gestion du Build</li>
+	<a href="https://github.com/formaits/f2i-jenkins/tree/master/AWS/Lab_10_CodeBuild.doc">doc TP de référence</a></p>
+    Accessible par le service "CodeBuild"<br>
+	Ce service permet de builder du code disponible dans un repo.
+	
+	<li>Gestion du déploiement</li>
+    Accessible par le service "CodeDeploy"<br>
+	Ce service permet de déployer un code builder.
+	
+	<li>Gestion des pipelines de livraison</li>
+    Accessible par le service "CodePipeline"<br>
+	Ce service permet de faire une livraison par Pipeline.
+  </ol>
+  
+</ol>
+
+
+</body></html>
